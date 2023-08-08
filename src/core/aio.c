@@ -218,6 +218,9 @@ nni_aio_stop(nni_aio *aio)
 			fn(aio, arg, NNG_ECANCELED);
 		}
 
+		// abort task if prepared but not yet started
+		nni_task_abort(&aio->a_task);
+
 		nni_aio_wait(aio);
 	}
 }
